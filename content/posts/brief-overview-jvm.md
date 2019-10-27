@@ -1,6 +1,6 @@
 +++
 title = "A brief overview of the JVM"
-date = "25-12-2016"
+date = 2016-12-25
 author = "Mehdi Cheracher"
 cover = ""
 tags = ["java", "jvm"]
