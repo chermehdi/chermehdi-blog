@@ -1,4 +1,4 @@
-baseURL = "http://chermehdi.com/"
+baseURL = "https://chermehdi.com/"
 languageCode = "en-us"
 title = "Mehdi Cheracher's Personnal blog"
 theme = "terminal"
