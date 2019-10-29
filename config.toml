@@ -40,3 +40,7 @@ copyright = "Mehdi Cheracher"
         identifier = "about"
         name = "About"
         url = "/about"
+[params.image]
+  url = "/img/java-log.jpg"
+  width = 900
+  height = 520

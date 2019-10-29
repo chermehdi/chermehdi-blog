@@ -1,13 +1,17 @@
-+++
-title = "A brief overview of the JVM"
-date = 2016-12-25
-author = "Mehdi Cheracher"
-cover = ""
-tags = ["java", "jvm"]
-keywords = ["java", "jvm"]
-description = "A brief description of some of the components of the Java virtual machine"
-showFullContent = false
-+++
+---
+title : "A brief overview of the JVM"
+date : 2016-12-25
+author : "Mehdi Cheracher"
+cover : ""
+tags : ["java", "jvm"]
+keywords : ["java", "jvm"]
+description : "A brief description of some of the components of the Java virtual machine"
+showFullContent : false
+
+chermehdi:
+  image:
+    url: "/img/hugo/markup.jpg"
+---
 
 Everyone knows about the Java programming language, but fewer people know what makes it so popular. One of the reasons is what’s going to be described here today: the JVM.
 
