@@ -2,7 +2,7 @@
 title = "JUnit 5: Injection enabled tests"
 date = 2018-11-11
 author = "Mehdi Cheracher"
-tags = ["junit", "java", "tests", "junit5", "dependency-injection"]
+tags = ["java", "junit5", "testing"]
 keywords = ["junit", "java", "tests", "junit5", "dependency-injection"]
 description = "an introduction on how to enable dependency injection in your JUnit 5 tests"
 showFullContent = false
