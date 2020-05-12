@@ -151,7 +151,7 @@ void testFinerGrainAnnotationProcessorCompilationSubject() {
 The library also offers a more thorough way to test the generated files:
 
 ```java
-@Tes
+@Test
 void testFinerGrainAnnotationProcessorJavaSourceObjectSubject() {
   SomeAnnotationProcessor pr = new SomeAnnotationProcessor();
   JavaFileObject targetFile = JavaFileObjects.forResource("TestFile.java");
