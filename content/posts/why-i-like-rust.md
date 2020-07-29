@@ -19,7 +19,7 @@ showFullContent = false
 
 
 **Disclaimer**: This post is not a Rust tutorial, it's more of a *Motivation to use Rust* and
-  What's my personal opinion / experience using the language in the last couple
+  What's my opinion / experience using the language in the last couple
   of months, if you want some good resources on learning it, check the resources
   section I'll make sure to include some useful links.
 
@@ -27,16 +27,15 @@ showFullContent = false
 
   Rust is a Systems programming language that was created by Mozilla, it promises things
     such as **Fearless concurrency**, and **Compile-time thread safety**, one of the nice things about it is that although it was originaly create at Mozilla
-    , it's developement is completely open source driven.
- Rust is a compiled language, with a **very** strong and elegant type system, it's essentially an  
-  an imperative language, but it comes with some nice functional aspects like
+    , it's development is completely open source driven.
+ Rust is a compiled language, with a **very** strong and elegant type system, it's essentially an imperative language, but it comes with some nice functional aspects like
   the ones you can find in Haskell or Scala. 
  Rust does not need any runtime, and it does not have a garbage
     collector (more on this later).
 
 ### Compared to Go
 I will try to do a quick comparison between Rust and Go since these two are
-  the two recent languages I learned and they are quite popular these days. 
+  the two recent languages I learned, and they are quite popular these days. 
   - Go has a garbage collector which implies GC pauses.
   - Rust does not have `nil` (or equivalent) pointers.
   - Rust provides nicer error handling via its rich type system.
