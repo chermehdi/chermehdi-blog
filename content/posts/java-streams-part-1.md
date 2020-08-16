@@ -33,8 +33,7 @@ wrong here) decided to build on the famous `Iterator<E>` API.
 the runtime can see fit.
 
 The `Spliterator<E>` API has no relation to the `Iterator<E>` one, it offers
-a bunch of methods, but we will be most interested in seeing 2.
-
+a bunch of methods, but we will be most interested in 3:
 
 - `Spliterator#trySplit`: This method allows for splitting the Spliterator
   instance into 2 parts, where we can execute computations on each part
@@ -54,29 +53,32 @@ a bunch of methods, but we will be most interested in seeing 2.
 
 {{< image src="/img/streams-class.png" alt="Stream class hieararchy" position="center" style="border-radius: 8px;" >}}
 
+
+**Disclaimer**: I may use the words: stream and pipeline interchangeably.
+
 The main implementation of the `Stream<E>` interface is the
 `ReferencePipeline<E>` class which contains implementations for most operations,
-most if not all the intermediate operations (also called stages) inherit from
-the ReferencePipeline class (unless the pipeline's content is a primitive type
+most if not all the of intermediate operations (also called stages) inherit from
+the `ReferencePipeline`class (unless the pipeline's content is a primitive type
 pipeline. *more on that later*).
 
-Every pipeline instance keeps track of (omitting some for brevity):
-  - The source pipeline and the parent pipeline. 
-  - The operations flags in the form of a  bitfield.
-  - The next pipeline.
-  - The source Spliterator | source Supplier.
-  - Flags to indicate whether parallel or not.
-  - The depth of the current pipeline (i.e the number of operations until now).
+Every pipeline instance keeps track of *(omitting some for brevity)*:
+- The source pipeline and the parent pipeline. 
+- The operations flags in the form of a  bitfield.
+- The next pipeline.
+- The source Spliterator | source Supplier.
+- Flags to indicate whether parallel or not.
+- The depth of the current pipeline (i.e the number of operations until now).
 
 There are two special implementations of the `ReferencePipeline` that are worth
 pausing to look at:
 
-`Head<E>`: This implementation is mainly a marker class, to differentiate
+- `Head<E>`: This implementation is mainly a marker class, to differentiate
 between an intermediate operation and the start of the pipeline.
 
-`Sink<E>`: An enhanced `Consumer`. it represents the intermediate and terminal nodes through which
+- `Sink<E>`: An enhanced `Consumer`. it represents the intermediate and terminal nodes through which
   the data flow inside the stream, it offers flow control methods such as
-  `accept(int, long, double, Object)`, `begin(int), end()`.
+  `accept(int, long, double, Object)`, `begin(int)` and `end()`.
 
 Intermediate operations inside a stream can be split into 2 categories:
 
