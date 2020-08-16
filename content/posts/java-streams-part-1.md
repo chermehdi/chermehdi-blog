@@ -63,6 +63,7 @@ the `ReferencePipeline`class (unless the pipeline's content is a primitive type
 pipeline. *more on that later*).
 
 Every pipeline instance keeps track of *(omitting some for brevity)*:
+
 - The source pipeline and the parent pipeline. 
 - The operations flags in the form of a  bitfield.
 - The next pipeline.
