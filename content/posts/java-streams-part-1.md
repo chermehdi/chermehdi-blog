@@ -68,7 +68,7 @@ Every pipeline instance keeps track of *(omitting some for brevity)*:
 - The operations flags in the form of a  bitfield.
 - The next pipeline.
 - The source Spliterator | source Supplier.
-- Flags to indicate whether parallel or not.
+- Flag to indicate whether parallel or not.
 - The depth of the current pipeline (i.e the number of operations until now).
 
 There are two special implementations of the `ReferencePipeline` that are worth
@@ -78,7 +78,7 @@ pausing to look at:
 between an intermediate operation and the start of the pipeline.
 
 - `Sink<E>`: An enhanced `Consumer`. it represents the intermediate and terminal nodes through which
-  the data flow inside the stream, it offers flow control methods such as
+  the data flows inside the stream, it offers flow control methods such as
   `accept(int, long, double, Object)`, `begin(int)` and `end()`.
 
 Intermediate operations inside a stream can be split into 2 categories:
@@ -94,7 +94,7 @@ Intermediate operations inside a stream can be split into 2 categories:
 ## The data flow
 
 Now that we looked at the major component in the stream API, let's explore how
-does the data flow through the System, and to make it simple, let's use an
+the data flows through the System, and to make it simple, let's use an
 example for reference:
 
 ```java
@@ -107,7 +107,7 @@ example for reference:
 In this simple example, we want to transform all the String elements to integers
 and only keep the ones that are even and then print the result.
 
-Keep in mind the without actually calling the `forEach` terminal operator, the
+Keep in mind that without actually calling the `forEach` terminal operator, the
 Stream won't perform any operation, hence the laziness.
 
 Let's start from the moment we create the stream and we follow the data flow, we
@@ -122,7 +122,7 @@ creating a stream out of it is as simple as calling `StreamSupport#stream`.
 
 Above I mentioned that execution starts only when the terminal operator is
 called, which means that from the last operator we see the stages in reverse
-order, ie:
+order, i.e:
 
 ```
 ForEeachOp<T> --> FilterOp<T> --> MapOp<E, T> --> Head<E>
@@ -137,9 +137,9 @@ Head<E> --> MapOp<E, T> --> FilterOp<T> --> ForEachOp<T>
 
 Now, what we need to understand is that calling the `forEach` method on
 a sequential stream will call an internal method called `evaluateSequential`,
-and this method will **flip** the stream nodes by walking the stream backwards
+and this method will **flip** the stream nodes by walking the stream nodes backwards
 and linking it in the order we expected to execute before performing the actual
-operations on the underlying data source, here is the piece of code that performs
+operations on the underlying data source. here is the piece of code that performs
 this operation:
 
 [1]
@@ -180,10 +180,10 @@ Sink<P_OUT> opWrapSink(int flags, Sink<R> sink) {
 ```
 
 Calling `opWrapSink` on the `Sink` representing the `map` operation in [1] will
-create a `ChainedReference` which is nothing than a Sink that has a reference to
-another Sink just like a linked list.
+create a `ChainedReference` which is nothing moew than a Sink that has a reference to
+the next Sink just like a linked list.
 
-The accept operation is where the actual operator logic, in this case, map takes
+The accept operation is where the actual operator logic resides, in this case, map takes
 a function and applies it to the current element and that's exactly what the
 `mapper.apply(u)` call is for.
 
@@ -211,7 +211,7 @@ result of the predicate *(A `Predicate` is a function that given an element
 returns `true` or `false`)* will determine whether to push the element down the
 pipeline or not.
 
-Confused? Let's try another example, this time with a `StatefulOp`
+Confused? Let's try another example, this time with a `StatefulOp`.
 
 
 ```java
@@ -282,28 +282,28 @@ Sink<T> opWrapSink(int flags, Sink<T> sink) {
 ```
 
 The `distinct` operator is essentially doing the same thing, but as you can see
-some differences:
+there are some differences:
 
-- The intermediate state is kept: The operator can keep an internal Set, that in
+- The intermediate state is kept: The operator can keep an internal `Set`, that in
   the worse case where all the elements coming from the source are all distinct,
   will contain eventually all the elements in the stream. 
-- Behaviour can be different: The behaviour is controlled by **Flags** (as they
-  are called by the API) and we will discuss the usage and the Why behind it
+- The algorithm is different: The codepath to be executed is chosen depending on
+  the flags associated with the incoming stream **Flags** and we will discuss the usage and the Why behind it
   in the next section.
 
 ## Flags
 
-Flags are lightweight markers (basically a bitfield) that describes the characteristics of a stream, they hold information about the content of the stream and the operations that have been carried out on it, example: are the stream elements distinct? are the stream elements sorted? are the stream elements sized? ...
+Flags are lightweight markers (basically a bitmask) that describes the characteristics of a stream, they hold information about the content of the stream and the operations that have been carried out on it, example: are the stream elements distinct? are the stream elements sorted? are the stream elements sized? ...
 
 Flags are invisible to the user of the stream API, but they can be very helpful
 for the underlying stream framework, to control and optimize computations. 
 
-Internally each stream operation will hold a bitfield (i.e an integer) that
+Internally each stream operation will hold a bitmask (i.e an integer) that
 represents the current characteristics of the current stream, this value is
 carried out and changed through successive operations applied to the stream
 parts, let's look at an example:
 
-The `sorted` operation sorts the elements of the stream the pushes them to the
+The `sorted` operation sorts the elements of the stream then pushes them to the
 downstream in sorted **Natural** order, but it also sets the bit (or the Flag)
 that marks the current output stream as `SORTED` so that information can be used
 in later operation to optimize execution speed or memory usage. 
@@ -441,6 +441,6 @@ and one can learn a lot of things when reading the underlying code, not
 everybody should do that of course, but it's a nice learning experience.
 
 In this post we talked in terms of **Sequential** execution, In another post we
-will try to look at how the API handles **Parallel** execution, what are the
-challenges that the Designers faced? and how did they overcome them?
+will take a look at how the API handles **Parallel** execution, what are the
+challenges that the designers faced? and how did they overcome them?
 
