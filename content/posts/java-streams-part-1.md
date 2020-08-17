@@ -128,7 +128,7 @@ order, i.e:
 ForEeachOp<T> --> FilterOp<T> --> MapOp<E, T> --> Head<E>
 ```
 
-with the arrow represent a "parent" relationship, but we need to execute the
+with the arrow representing a *parent* relationship, but we need to execute the
 operations in reverse order, i.e: 
 
 ```
