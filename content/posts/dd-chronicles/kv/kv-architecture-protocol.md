@@ -24,7 +24,7 @@ when writing distributed software.
 
 Choosing a programming language to achieve the goals stated above is not gonna
 be easy, especially that most of the readers (and me included) will have
-different opinions on what do they think is a _better_ programming language, so
+different opinions on what they think is a _better_ programming language, so
 I will pick the programming language that I think most suitable for building the
 system at hand, for a distributed key-value store I choose **Rust**.
 
@@ -45,7 +45,7 @@ We want to support _(at first at least)_ three types of operations:
   responsibility to make the transformation from a RAW string value to a known
   type.
 - `GET KEY`: get the value associated with the given key, this returns the raw
-  string _if any_ identified by the given key, which have been set by
+  string _(if any)_ identified by the given key, which has been set by
   a previous call to `SET`
 - `CLEAR KEY`: delete the key from the store, and any data associated with it,
   if the key does not exist this should be a no-op.
@@ -53,8 +53,8 @@ We want to support _(at first at least)_ three types of operations:
 ## Overall architecture
 
 This is the overall architecture, it doesn't have anything that you wouldn't
-expect following what I described above, It's a connonical client-server
-archiecture, we will iterate on this design as we go along, by adding more
+expect following what I described above, It's a canonical client-server
+architecture, we will iterate on this design as we go along, by adding more
 details and showing off additional constraints, but it's good to start
 somewhere:
 
@@ -90,7 +90,7 @@ So a protocol proposal could be as follows:
 {{< image src="/img/dd/kv/clear-protocol-def.png" alt="Clear command protocol" position="center" style="border-radius: 8px;" >}}
 
 From the above descriptions of the different command protocol, it's fair to say
-that it respects the requirements define above, as it can easily be parsed
+that it respects the requirements defined above, as it can easily be parsed
 _as we will show below_, and it is language agnostic, one can imagine writing
 a simple client for this in any programming language.  
 
@@ -115,7 +115,7 @@ used to store the error message in case of failure, So the model will look like 
 
 ## Implementation
 
-To start implementing this we will create a new project using the `cargo new`
+To start implementing this, we will create a new project using the `cargo new`
 helper _(I am assuming that you have rust or your favourite programming language
 environment setup)_, the initial directory structure should be something like
 this:
@@ -129,13 +129,13 @@ this:
 ```
 
 The protocol implementation could be used on the server and client, so it's
-better to have it in it own crate (crate is a rust term that refers to
+better to have it in its own crate (crate is a rust term that refers to
 a library), but for simplicity reasons I will keep it in the same crate for the
 time being.
 
 I will create a directory under my `src` folder called `protocol` that will
 contain all the protocol implementation, and will make it easier to migrate
-to it's own crate later on.
+to its own crate later on.
 
 What we want to have at the end of this blog is an implementation of this
 function:
@@ -261,7 +261,7 @@ The code part for the write path is quite similar, we will define a `Writer` to
 struct to attach our methods later, the struct itself is just a marker, but it
 can contain state later as we see fit.
 
-The new parts that will be added is a dependency on a library called [tokio](https://github.com/tokio-rs/tokio).
+The new thing that will be added is a dependency on a library called [tokio](https://github.com/tokio-rs/tokio).
 The support for asynchronous programming in Rust is a join effort between the
 language team and the libraries, the tokio library provides an asynchronous
 runtime for doing network programming, with numerous utilities to help
