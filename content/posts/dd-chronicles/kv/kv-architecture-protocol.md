@@ -2,7 +2,7 @@
 title = "Distributed systems chronicles: Key value store (1) - Architecture and Protocol"
 date = 2021-02-28
 author = "Mehdi Cheracher"
-tags = ["distributed-systems", "architecture", "rust"]
+tags = ["ds-chronicles", "distributed-systems", "architecture", "rust"]
 keywords = ["distributed-systems", "architecture", "key-value-store"]
 description = "The first post of the _Distributed systems chronicles series_ with a description of the architecture and communication protocol of a distributed key-value store"
 showFullContent = false
@@ -257,15 +257,16 @@ pub fn parse_response(data: &mut Cursor<&[u8]>) -> Result<Response> {
 }
 ```
 
-The code part for the write path is quite similar, we will define a `Writer` to
-struct to attach our methods later, the struct itself is just a marker, but it
+The code part for the write path is quite similar, we will define a `Writer` 
+struct to attach our methods to, the struct itself is just a marker, but it
 can contain state later as we see fit.
 
 The new thing that will be added is a dependency on a library called [tokio](https://github.com/tokio-rs/tokio).
+
 The support for asynchronous programming in Rust is a join effort between the
 language team and the libraries, the tokio library provides an asynchronous
 runtime for doing network programming, with numerous utilities to help
-develop highly performant scalable software, but for now we are only going to
+develop highly performant and scalable software, but for now we are only going to
 leverage a small subset of its features.
 
 All of our data reading has been done on a `Cursor` type in a **synchronous**
@@ -275,11 +276,16 @@ write path, data will be written directly to the output stream asynchronously
 without copying it to another intermediate data structure, it's just easier
 / faster this way.
 
-We will introduce two types for this: `TcpStream` which is an abstraction over
+We will introduce two types for this: 
+
+- `tokio::net::TcpStream` which is an abstraction over
 ... well a TCP stream, you can write / read bytes from it asynchronously. 
 
-*Note: there is a `TcpStream` provided by the standard library which does
-**synchronous** read/write operations*
+  _**Note**: there is a `std::net::TcpStream` provided by the standard library which does
+  **synchronous** read/write operations_
+
+- `BufWriter` which will handle buffering `write_*` calls to the underlying
+  `TcpStream` thus reducing the number of write syscalls that we have to make.
 
 So the code for the write path will be something along the lines of: 
 
