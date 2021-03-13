@@ -339,4 +339,4 @@ provided the _detailed_ version of the protocol that we are going to use to
 communicate with our server.
 
 For the rest of the code, you can find it [here](https://github.com/chermehdi/ds-chronicles).
-See in part 2 of the series, stay tuned.
+See in [part 2](https://chermehdi.com/posts/dd-chronicles/kv/kv-accepting-requests/) of the series, stay tuned.
