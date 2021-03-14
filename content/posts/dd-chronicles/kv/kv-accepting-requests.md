@@ -1,4 +1,4 @@
-++
++++
 title = "Distributed systems chronicles: Key value store (2) - Accepting requests"
 date = 2021-03-14
 author = "Mehdi Cheracher"
@@ -14,12 +14,11 @@ In the previous [post](https://chermehdi.com/posts/dd-chronicles/kv/kv-architect
 
 ## Accepting requests 
 
-To start accepting commands, we will need some form of a transport to carry the
+To start accepting commands, we will need some form of transport to carry the
 bytes representing our commands, for that we will start a TCP server powered by
 the `tokio` library.
 
-The server will handle accepting requests, and spawning a separate `tokio` task
-per client connection to handle command parsing and execution.
+The server will handle accepting requests, and spawning a separate `tokio` task per client connection to handle command parsing and execution.
 
 ```rust
 pub async fn run(listener: TcpListener) {
@@ -36,11 +35,8 @@ pub async fn run(listener: TcpListener) {
 }
 ```
 
-The code for the `run` function is straight forward, given a `TcpListener`, which
-we will create at startup based on some parameters given by the user, start
-accepting clients connections, and handle each connection in it's own separate
-`tokio` task, this will allow us to not block the main server thread, and scale our
-workload accross multiple CPU cores thanks to the `tokio` runtime task scheduler.
+The code for the `run` function is straight forward, given a `TcpListener`, which we will create at startup based on some parameters given by the user, start
+accepting clients connections, and handle each connection in it's own separate `tokio` task, this will allow us to not block the main server thread, and scale our workload across multiple CPU cores thanks to the `tokio` runtime task scheduler.
 
 ```rust
 async fn process(stream: TcpStream) -> Result<()> {
@@ -69,8 +65,7 @@ command parsing and execution to another component that is created per
 connection: `ConnectionHandler`.
 
 The function will try to continuously read commands from the client and execute
-them as they come, and it will stop once the connection is closed from the
-client, or an error happens.
+them as they come, and it will stop once the connection is closed from the client, or an error happens.
 
 ```rust
 pub struct ConnectionHandler {
@@ -84,11 +79,10 @@ The `ConnectionHandler` type keeps a reference of a **buffered** `TcpStream`, an
 an internal buffer to read bytes coming from the TCP stream.
 
 Buffering the `TcpStream` is necessary to not cause individual write calls to
-issue individual syscalls which is expensive and unnecessary. instead, we wan't the stream to only issue the write
+issue individual syscalls which is expensive and unnecessary. instead, we want the stream to only issue the write
 syscalls once the buffer is full or we explicitly flush it.
 
-The read buffer heald by the `ConnectionHandler` is a type from the `bytes`
-crate, and you can look at it as a `[u8]` but with a lot of convinience methods,
+The read buffer heald by the `ConnectionHandler` is a type from the `bytes` crate, and you can look at it as a `[u8]` but with a lot of convenience methods,
 it is created with a fixed capacity (defaulted to `1024`), i.e we suppose that each command shouldn't
 take more than a given size, and if that isn't the case, we will deal with it
 later on.
@@ -122,10 +116,10 @@ a parse succeeds.
   if we detect invalid or unexpected bytes, we error-out before doing any more
   unnecessary work which could improve performance.)
 
-After execting a command the response is written by calling the
+After executing a command the response is written by calling the
 `protocol::Writer::write` from the previous post as well.
 
-For this post we only have one one single command, which a test command to
+For this post, we only have one single command, which is a test command to
 verify that the server is responsive, the `ping` command.
 
 ```rust
@@ -211,9 +205,11 @@ objects from the protocol module and trying to `assert` on the returned values.
 
 ## Conclusion
 
-In this post we successfully managed to create a TCP server and started
+In this post, we successfully managed to create a TCP server and started
 accepting connections and executing `ping` commands, in the following posts we
 will dig into the data model, and how we will persist the data in disk/in-memory
 and we will implement `get` and `set` commands.
 
-The full source code could be found [here](https://github.com/chermehdi/ds-chronicles), stay tunned!
+The full source code could be found [here](https://github.com/chermehdi/ds-chronicles), stay tuned!
+
+
