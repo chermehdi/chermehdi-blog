@@ -101,7 +101,7 @@ The type definition is quite verbose, but it's not for nothing:
   allocation.
 - The object in the box should be transferable across thread boundaries thus
   the need for `Send` and `Sync`.
-- The object should be safe to be accessed from multiple threads, thus the need
+- The object should be safe to be accessed by multiple threads, thus the need
   for a `Mutex`.
 - The object should be thread-safe copyable, thus the need of an Atomically safe
   reference counted pointer, or `Arc`.
@@ -122,8 +122,8 @@ pub(crate) struct Executor {
 ```
 
 At creation time, the `Executor` takes ownership of a `StorageEngine` instance and
-a `ClientHandler` and keeps running and executing commands until and error
-happens (the command sent by the client cannot be parsed), or the client closes
+a `ClientHandler` and keeps running and executing commands until an error
+occurs _(the command sent by the client cannot be parsed)_, or the client closes
 the connection.
 
 ```rust
@@ -171,7 +171,7 @@ async fn execute_cmd(
 ```
 
 Changing the underlying `StorageEngine` requires taking a lock as it's guarded
-by a `Mutex` as described above, as the same instance would be accessible from
+by a `Mutex` as described above, as the same instance would be accessible by
 multiple threads.
 
 Taking a `Mutex` lock will return a `MutexGuard` type (if the lock could be
