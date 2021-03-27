@@ -210,6 +210,7 @@ accepting connections and executing `ping` commands, in the following posts we
 will dig into the data model, and how we will persist the data in disk/in-memory
 and we will implement `get` and `set` commands.
 
-The full source code could be found [here](https://github.com/chermehdi/ds-chronicles), stay tuned!
+The full source code could be found [here](https://github.com/chermehdi/ds-chronicles).
 
+See [part 3](https://chermehdi.com/posts/dd-chronicles/kv/kv-storage-layer/) of the series, stay tuned.
 
