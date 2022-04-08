@@ -4,8 +4,7 @@ date = 2022-04-01
 author = "Mehdi Cheracher"
 tags = ["compiler", "go", "golang"]
 keywords = ["compiler", "golang"]
-description = "Part one of the Go compiler explained series discussing the
-source parser"
+description = "Part one of the Go compiler inner workings series"
 showFullContent = false
 +++
 
