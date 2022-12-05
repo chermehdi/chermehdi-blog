@@ -10,13 +10,14 @@ copyright = "Mehdi Cheracher"
   # ["orange", "blue", "red", "green", "pink"]
   themeColor = "red"
   # if you set this to 0, only submenu trigger will be visible
-  showMenuItems = 2
+  showMenuItems = 3 
   # show selector to switch language
-  showLanguageSelector = false
+  showLanguageSelector = true 
   # set theme to full screen width
   fullWidthTheme = true
   # center theme with default width
   centerTheme = true
+	readingTime = true
   # set a custom favicon (default is a `themeColor` square)
   # favicon = "favicon.ico"
 
@@ -25,10 +26,11 @@ copyright = "Mehdi Cheracher"
     languageName = "English"
     title = "Chermehdi"
     subtitle = "Mehdi Cheracher's personnal Blog"
-    keywords = "Java,Java core,chermehdi,Java EE,design patterns"
+    keywords = "Rust, Go, Distributed Systems, Systems Programming"
     copyright = "Mehdi Cheracher, powered by Hugo"
     menuMore = "Show more"
     readMore = "Read more"
+		missingContentMessage = "Page not found"
     readOtherPosts = "Read other posts"
 
     [languages.en.params.logo]

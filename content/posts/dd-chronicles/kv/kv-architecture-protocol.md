@@ -58,7 +58,7 @@ architecture, we will iterate on this design as we go along, by adding more
 details and showing off additional constraints, but it's good to start
 somewhere:
 
-{{< image src="/img/dd/kv/kv-arch-1.png" alt="Key value store architecture" position="center" style="border-radius: 8px;" >}}
+{{< figure src="/img/dd/kv/kv-arch-1.png" alt="Key value store architecture" position="center" style="border-radius: 8px;" >}}
 
 ## Communication protocol
 
@@ -79,15 +79,15 @@ So a protocol proposal could be as follows:
 
 ### Sending a SET
 
-{{< image src="/img/dd/kv/set-protocol-def.png" alt="Set command protocol" position="center" style="border-radius: 8px;" >}}
+{{< figure src="/img/dd/kv/set-protocol-def.png" alt="Set command protocol" position="center" style="border-radius: 8px;" >}}
 
 ### Sending a GET 
 
-{{< image src="/img/dd/kv/get-protocol-def.png" alt="Get command protocol" position="center" style="border-radius: 8px;" >}}
+{{< figure src="/img/dd/kv/get-protocol-def.png" alt="Get command protocol" position="center" style="border-radius: 8px;" >}}
 
 ### Sending a clear 
 
-{{< image src="/img/dd/kv/clear-protocol-def.png" alt="Clear command protocol" position="center" style="border-radius: 8px;" >}}
+{{< figure src="/img/dd/kv/clear-protocol-def.png" alt="Clear command protocol" position="center" style="border-radius: 8px;" >}}
 
 From the above descriptions of the different command protocol, it's fair to say
 that it respects the requirements defined above, as it can easily be parsed
@@ -111,7 +111,7 @@ used to store the error message in case of failure, So the model will look like 
 
 ### Response 
 
-{{< image src="/img/dd/kv/response-protocol-def.png" alt="Response command protocol" position="center" style="border-radius: 8px;" >}}
+{{< figure src="/img/dd/kv/response-protocol-def.png" alt="Response command protocol" position="center" style="border-radius: 8px;" >}}
 
 ## Implementation
 

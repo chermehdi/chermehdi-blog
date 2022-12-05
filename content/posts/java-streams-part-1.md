@@ -51,7 +51,7 @@ a bunch of methods, but we will be most interested in 3:
 
 ## Class Hierarchy
 
-{{< image src="/img/streams-class.png" alt="Stream class hieararchy" position="center" style="border-radius: 8px;" >}}
+{{< figure src="/img/streams-class.png" alt="Stream class hieararchy" position="center" style="border-radius: 8px;" >}}
 
 
 **Disclaimer**: I may use the words: stream and pipeline interchangeably.

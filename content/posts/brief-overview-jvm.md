@@ -20,7 +20,7 @@ A few things to note:
 
 The implementation of the Java Virtual Machine is called a Java Run Time environment *(JRE)* and when you execute your code (running the `java` command) a new Instance of the Java Virtual Machine is created.
 
-{{< image src="/img/jvm-overview.gif" alt="Overview of the JVM" position="center" style="border-radius: 8px;" >}}
+{{< figure src="/img/jvm-overview.gif" alt="Overview of the JVM" position="center" style="border-radius: 8px;" >}}
 
 The figure above shows an the different parts (subsystems) of the JVM Specification,
 we will briefly describe few of them later on.

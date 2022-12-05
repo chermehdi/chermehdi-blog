@@ -67,7 +67,7 @@ it's the `Storage` implementation itself.
 
 ### The flow
 
-{{< image src="/img/dd/kv/leader-election-state-machine.png" alt="Raft leader election state machine" position="center" style="border-radius: 8px;" >}}
+{{< figure src="/img/dd/kv/leader-election-state-machine.png" alt="Raft leader election state machine" position="center" style="border-radius: 8px;" >}}
 
 The flow of a Raft run (i.e Term in Raft lingo), starts with every node being in
 the follower state, the followers have random timers that keeps decrementing
@@ -93,7 +93,7 @@ above described flow.
 
 So as described above, A Raft node (server) can be in one of 3 states:
 
-{{< image src="/img/dd/kv/raft-state-transition.png" alt="Raft state transitions" position="center" style="border-radius: 8px;" >}}
+{{< figure src="/img/dd/kv/raft-state-transition.png" alt="Raft state transitions" position="center" style="border-radius: 8px;" >}}
 
 - **Follower**: Passive actors, the leader tells them what they should do, and they expect regular heartbeats from him.
 
@@ -105,7 +105,7 @@ So as described above, A Raft node (server) can be in one of 3 states:
 
 The period between each election round is called a Term:
 
-{{< image src="/img/dd/kv/raft-terms.png" alt="Raft Terms" position="center" style="border-radius: 8px;" >}}
+{{< figure src="/img/dd/kv/raft-terms.png" alt="Raft Terms" position="center" style="border-radius: 8px;" >}}
 
 Each term can have at most one **single leader** This implies that there can be a case where no leader has been elected due to a split vote, which would cause the actors to start a new term in an attempt to elect a leader. 
 
@@ -175,7 +175,7 @@ Let's take a look at an example of how a newly elected leader might replicate
 it's log to all other servers, let's imagine that the current log state is the
 following: 
 
-{{< image src="/img/dd/kv/log-state-initial.png" alt="Initial log state after election" position="center" style="border-radius: 8px;" >}}
+{{< figure src="/img/dd/kv/log-state-initial.png" alt="Initial log state after election" position="center" style="border-radius: 8px;" >}}
 
 All entries up to lindex `5` are committed, and node-1 has been elected leader.
 
@@ -186,13 +186,13 @@ To simplify, let's look at how the leader will replicate it's log to node-4,
 while keeping in mind that it will do the same thing for all of the other nodes.
 
 
-{{< image src="/img/dd/kv/log-replication-1.png" alt="Leader replicating it's log to node-4" position="center" style="border-radius: 8px;" >}}
+{{< figure src="/img/dd/kv/log-replication-1.png" alt="Leader replicating it's log to node-4" position="center" style="border-radius: 8px;" >}}
 
 The leader will keep sending `AppendEntries` RPC calls _(1) (2) (3)_ to the node to find the
 first index in the node-4 log that have been written at the same term as an
 entry at the same index in the leader's log, in this case it's index `5`.
 
-{{< image src="/img/dd/kv/log-replication-2.png" alt="Leader replicating it's log to node-4" position="center" style="border-radius: 8px;" >}}
+{{< figure src="/img/dd/kv/log-replication-2.png" alt="Leader replicating it's log to node-4" position="center" style="border-radius: 8px;" >}}
 
 Once that index is found, the leader is sure that all replicated entries up to
 that point are exactly the same in both logs, so all it has to do is to
